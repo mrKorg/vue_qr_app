@@ -2,7 +2,7 @@
     <div class="form login">
         <div class="container">
             <div class="form__box">
-                <b-form @submit.prevent="validateBeforeSubmit" @reset="onReset" v-if="show">
+                <b-form @submit.prevent="validateBeforeSubmit" @reset="onReset">
                     <b-form-group id="nameInputGroup"
                                   label="Email address:"
                                   label-for="email"
@@ -61,33 +61,20 @@
 
 <script>
     import firebase from 'firebase';
+    import form from '@/mixins/form';
 
     export default {
-        name: 'registration',
-        components: {alert},
+        name: 'login',
+        mixins: [form],
         data() {
             return {
                 form: {
-                    email: '',
-                    password: '',
-                },
-                show: true,
-                alert: {
-                    show: false,
-                    message: null,
-                    type: null
+                    email: null,
+                    password: null,
                 }
             }
         },
         methods: {
-            onReset(evt) {
-                evt.preventDefault();
-                this.clearForm();
-                this.show = false;
-                this.$nextTick(() => {
-                    this.show = true
-                });
-            },
             validateBeforeSubmit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
@@ -111,22 +98,6 @@
                         this.errors.clear();
                     }, 3000)
                 });
-            },
-            clearForm() {
-                this.form.forEach(item => item = '');
-            },
-            showAlert(message, type) {
-                this.alert.show = true;
-                this.alert.message = message;
-                this.alert.type = type;
-                setTimeout(() => {
-                    this.clearAlert();
-                }, 3000)
-            },
-            clearAlert() {
-                this.alert.show = false;
-                this.alert.message = null;
-                this.alert.type = null;
             }
         }
     }
