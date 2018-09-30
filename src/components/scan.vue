@@ -1,16 +1,20 @@
 <template>
     <div class="form scan">
         <div class="container">
+            <div class="form__box">
+                <transition name="fade">
+                    <div v-if="alert.show" :class="['alert', `alert-${alert.type}`]" role="alert">
+                        {{ alert.message }}
+                    </div>
+                </transition>
+            </div>
             <div class="scan__box">
                 <transition name="fade">
                     <p v-if="content" class="scan__content text-center">
                         <a :href="content" target="_blank">{{ content }}</a>
                     </p>
                 </transition>
-                <QrcodeReader
-                    @decode="onDecode"
-                    @init="onInit">
-
+                <QrcodeReader @decode="onDecode" @init="onInit">
                     <loadingIndicator v-show="loading"/>
                 </QrcodeReader>
             </div>

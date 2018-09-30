@@ -4,7 +4,12 @@ export default {
     components: {loadingIndicator},
     data() {
         return {
-            loading: true
+            loading: true,
+            alert: {
+                show: false,
+                message: null,
+                type: 'danger'
+            }
         }
     },
     methods: {
@@ -15,6 +20,8 @@ export default {
                 this.$emit('success');
             } catch (error) {
                 this.$emit('error', error);
+                this.alert.show = true;
+                this.alert.message = error.message;
             } finally {
                 this.loading = false;
             }
