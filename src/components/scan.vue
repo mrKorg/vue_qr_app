@@ -2,7 +2,7 @@
     <div class="form scan">
         <div class="container">
             <div class="form__box">
-                eeee
+                <qrcode-reader @decode="onDecode"></qrcode-reader>
             </div>
         </div>
     </div>
@@ -10,6 +10,10 @@
 
 <script>
     export default {
-
+        methods: {
+            onDecode (decodedString) {
+                console.log(decodedString);
+            }
+        }
     }
 </script>

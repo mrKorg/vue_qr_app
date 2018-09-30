@@ -11,10 +11,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 // VeeValidate
 import VeeValidate from 'vee-validate';
+// Vue QR code reader
+import VueQrcodeReader from 'vue-qrcode-reader';
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(VeeValidate);
+Vue.use(VueQrcodeReader);
 
 let app;
 
